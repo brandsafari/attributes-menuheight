@@ -1,0 +1,36 @@
+{
+	"name": "@brandsafari/developer-starter",
+	"version": "1.0.0",
+	"description": "Developer starter template for Brandsafari projects.",
+	"homepage": "https://github.com/Brandsafari/developer-starter#readme",
+	"license": "ISC",
+	"keywords": [],
+	"author": {
+		"name": "Brandsafari"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/brandsafari/developer-starter.git"
+	},
+	"type": "module",
+	"main": "src/index.js",
+	"module": "src/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development node ./bin/build.js",
+		"build": "cross-env NODE_ENV=production node ./bin/build.js",
+		"format": "prettier --write ./src",
+		"release": "changeset publish",
+		"update": "npm update -i -L -r"
+	},
+	"devDependencies": {
+		"cross-env": "^7.0.3",
+		"esbuild": "^0.17.7",
+		"prettier": "^2.8.4"
+	},
+	"dependencies": {
+		"@finsweet/ts-utils": "^0.37.3"
+	}
+}
