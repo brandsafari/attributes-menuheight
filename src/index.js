@@ -24,7 +24,6 @@ window.Webflow.push(() => {
 function resizeMenu() {
    const newHeight = getDistanceFromElementBottomToScreenBottom(navBar)
    menuContainer.style.height = newHeight / 16 + "rem"
-   console.log("resize")
 }
 
 function getDistanceFromElementBottomToScreenBottom(element) {
