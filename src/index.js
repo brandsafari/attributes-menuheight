@@ -1,8 +1,12 @@
 import { getCurrentBreakpoint } from "@finsweet/ts-utils"
 
-const menu = document.querySelector("[brs-menuheight='menu']")
+const menu =
+   document.querySelector("[brs-menuheight='menu,navbar']") ||
+   document.querySelector("[brs-menuheight='menu']")
+const navBar =
+   document.querySelector("[brs-menuheight='menu,navbar']") ||
+   menu?.querySelector("[brs-menuheight='navbar']")
 const menuContainer = menu?.querySelector("[brs-menuheight='menu-container']")
-const navBar = menu?.querySelector("[brs-menuheight='navbar']")
 
 let breakpoints = menu?.getAttribute("brs-menuheight-breakpoints")?.replace(/\s/g, "").split(",")
 if (!breakpoints?.length) breakpoints = ["tiny"]
@@ -19,6 +23,17 @@ window.Webflow.push(() => {
       requestAnimationFrame(resizeMenu)
    })
    resizeMenu()
+
+   const menuObserver = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+         const styleAttribute = mutation.target.getAttribute("style")
+         if (styleAttribute.includes("height:") && styleAttribute.includes("rem")) continue
+         requestAnimationFrame(resizeMenu)
+      }
+   })
+
+   const config = { attributes: true, attributeFilter: ["style"], attributeOldValue: true }
+   menuObserver.observe(menuContainer, config)
 })
 
 function resizeMenu() {
